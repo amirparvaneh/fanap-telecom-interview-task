@@ -3,11 +3,15 @@ package com.fanap.telecom.service.serviceImpl;
 import com.fanap.telecom.constants.ErrorMessage;
 import com.fanap.telecom.exception.NotFoundException;
 import com.fanap.telecom.model.User;
+import com.fanap.telecom.model.dto.UserResponseAllDto;
 import com.fanap.telecom.repository.UserRepo;
 import com.fanap.telecom.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+
+import java.util.List;
 
 
 @Service
@@ -15,6 +19,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserRepo userRepo;
+    private final ModelMapper mapper;
 
     @Override
     public void save(User user) {
@@ -30,5 +35,11 @@ public class UserServiceImpl implements UserService {
     public User find(Long userId) {
         return userRepo.findById(userId).orElseThrow(() ->
                 new NotFoundException(ErrorMessage.ERROR_NOT_FOUND + userId));
+    }
+
+    @Override
+    public List<UserResponseAllDto> getAllUser() {
+        List<User> users = userRepo.findAll();
+        return users.stream().map(user -> mapper.map(user,UserResponseAllDto.class)).toList();
     }
 }

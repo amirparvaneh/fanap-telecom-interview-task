@@ -21,4 +21,10 @@ public class Product extends BaseEntity {
     private String name;
     @Column(nullable = false)
     private Long price;
+
+    @Override
+    public String toString() {
+
+        return "Product [id=" + getProductId() + ", name=" + name + ", price=" + price + "]";
+    }
 }

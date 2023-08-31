@@ -8,11 +8,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
+@Table(name = "seller")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User extends BaseEntity {
 
     @Id
