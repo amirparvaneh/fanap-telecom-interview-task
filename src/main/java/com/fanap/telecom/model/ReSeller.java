@@ -2,7 +2,6 @@ package com.fanap.telecom.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,11 +10,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class ReSeller extends BaseEntity {
+public class ReSeller extends User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reSellerId;
-
+    @Column(name = "code",unique = true)
+    private String code;
 }
