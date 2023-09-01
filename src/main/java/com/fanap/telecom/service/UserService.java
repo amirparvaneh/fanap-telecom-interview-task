@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface UserService extends BaseService<User>{
     List<UserResponseAllDto> getAllUser();
+    User getUserByUserName(String username);
 }

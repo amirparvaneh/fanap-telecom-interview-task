@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface ResellerRepo extends JpaRepository<ReSeller, Long> {
-    Optional<ReSeller> findReSellerByCode(String code);
+    ReSeller findReSellerByCode(String code);
 }

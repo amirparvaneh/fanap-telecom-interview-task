@@ -42,4 +42,9 @@ public class UserServiceImpl implements UserService {
         List<User> users = userRepo.findAll();
         return users.stream().map(user -> mapper.map(user,UserResponseAllDto.class)).toList();
     }
+
+    @Override
+    public User getUserByUserName(String username) {
+        return userRepo.findUserByUserName(username);
+    }
 }

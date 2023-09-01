@@ -27,7 +27,7 @@ public class UserController {
     public ResponseEntity<BaseResponseDto<Object>> addUser(@RequestBody UserRequestDto userRequestDto) {
         userService.save(mapper.map(userRequestDto, User.class));
         return ResponseEntity.ok().body(BaseResponseDto.builder()
-                .message(Messages.ENTITY_ADDED)
+                .message(Messages.ENTITY_ADDED + userRequestDto.getUserName())
                 .build());
     }
 
@@ -35,7 +35,7 @@ public class UserController {
     public ResponseEntity<BaseResponseDto<Object>> getSellerById(@PathVariable Long sellerId) {
         User user = userService.find(sellerId);
         return ResponseEntity.ok().body(BaseResponseDto.builder()
-                .message(Messages.ENTITY_ADDED)
+                .message(Messages.ENTITY_ADDED + sellerId)
                 .result(user)
                 .build());
     }
