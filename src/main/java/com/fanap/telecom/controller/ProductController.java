@@ -32,6 +32,7 @@ public class ProductController {
     public ResponseEntity<BaseResponseDto<Object>> getProductById(@PathVariable Long productId) {
         Product product = productService.find(productId);
         return ResponseEntity.ok().body(BaseResponseDto.builder()
+                .message(Messages.ENTITY_FOUNDED + productId)
                 .result(product)
                 .build());
     }

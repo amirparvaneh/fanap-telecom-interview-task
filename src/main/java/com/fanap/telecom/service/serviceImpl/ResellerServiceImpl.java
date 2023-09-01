@@ -25,8 +25,8 @@ public class ResellerServiceImpl implements ResellerService {
     @Override
     public void save(ReSeller reSeller) {
         if (Objects.nonNull(resellerRepo.findReSellerByCode(reSeller.getCode()))
-                && Objects.nonNull(userService.getUserByUserName(reSeller.getUserName()))) {
-            throw new DuplicateException(ErrorMessage.DUPLICATE_ENTITY + reSeller.getUserId());
+                || Objects.nonNull(userService.getUserByUserName(reSeller.getUserName()))) {
+            throw new DuplicateException(ErrorMessage.DUPLICATE_ENTITY + reSeller.getUserName());
         }
         resellerRepo.save(reSeller);
     }

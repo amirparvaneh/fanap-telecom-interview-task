@@ -35,7 +35,7 @@ public class UserController {
     public ResponseEntity<BaseResponseDto<Object>> getSellerById(@PathVariable Long sellerId) {
         User user = userService.find(sellerId);
         return ResponseEntity.ok().body(BaseResponseDto.builder()
-                .message(Messages.ENTITY_ADDED + sellerId)
+                .message(Messages.ENTITY_FOUNDED + sellerId)
                 .result(user)
                 .build());
     }

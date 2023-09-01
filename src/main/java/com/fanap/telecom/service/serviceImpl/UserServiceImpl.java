@@ -1,6 +1,7 @@
 package com.fanap.telecom.service.serviceImpl;
 
 import com.fanap.telecom.constants.ErrorMessage;
+import com.fanap.telecom.exception.DuplicateException;
 import com.fanap.telecom.exception.NotFoundException;
 import com.fanap.telecom.model.User;
 import com.fanap.telecom.model.dto.UserResponseAllDto;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
@@ -23,6 +25,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
+        if(Objects.nonNull(userRepo.findUserByUserName(user.getUserName()))){
+            throw new DuplicateException(ErrorMessage.DUPLICATE_ENTITY + user.getUserName());
+        }
         userRepo.save(user);
     }
 

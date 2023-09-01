@@ -32,14 +32,15 @@ public class ResellerController {
     }
 
     @GetMapping(value = "/{resellerId}")
-    public ResponseEntity<BaseResponseDto<Object>> getResellerById(@PathVariable Long resellerId){
+    public ResponseEntity<BaseResponseDto<Object>> getResellerById(@PathVariable Long resellerId) {
         return ResponseEntity.ok().body(BaseResponseDto.builder()
+                .message(Messages.ENTITY_FOUNDED + resellerId)
                 .result(resellerService.find(resellerId))
                 .build());
     }
 
     @GetMapping
-    public ResponseEntity<List<ResellerAllResponseDto>> getAllReseller(){
+    public ResponseEntity<List<ResellerAllResponseDto>> getAllReseller() {
         return ResponseEntity.ok().body(resellerService.findAllReseller());
     }
 }
