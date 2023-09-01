@@ -26,6 +26,7 @@ public class SaleOrderServiceImpl implements SaleOrderService {
 
     @Override
     public void save(SaleOrder saleOrder) {
+        checkOrder(saleOrder);
         saleOrderRepo.save(saleOrder);
     }
 
@@ -43,6 +44,12 @@ public class SaleOrderServiceImpl implements SaleOrderService {
     @Override
     public List<OrderListDto> getAllOrder() {
         List<SaleOrder> saleOrderList = saleOrderRepo.findAll();
-        return saleOrderList.stream().map(saleOrder -> mapper.map(saleOrder,OrderListDto.class)).toList();
+        return saleOrderList.stream().map(saleOrder -> mapper.map(saleOrder, OrderListDto.class)).toList();
+    }
+
+    private void checkOrder(SaleOrder saleOrder) {
+        if (Objects.isNull(saleOrder.getUser()) || Objects.isNull(saleOrder.getProduct())) {
+            throw new NotFoundException(ErrorMessage.NOT_VALID_ORDER);
+        }
     }
 }

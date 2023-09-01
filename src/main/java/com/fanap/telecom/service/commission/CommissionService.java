@@ -9,5 +9,5 @@ import java.math.BigDecimal;
 public interface CommissionService {
     BigDecimal calculateCommissionPerSale(SaleOrderRequestDto saleOrderRequestDto);
     void saveCommission(CommissionRequestDto commissionRequestDto);
-    
+    void assignCommissionToReseller(Long saleOrderId);
 }

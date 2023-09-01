@@ -1,5 +1,7 @@
 package com.fanap.telecom.model.dto;
 
+import com.fanap.telecom.model.Product;
+import com.fanap.telecom.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,8 +16,8 @@ import java.util.Date;
 @NoArgsConstructor
 public class OrderListDto implements Serializable {
     private Long saleOrderId;
-    private Long user;
-    private Long product;
+    private User user;
+    private Product product;
     private Integer number;
     private Date createdAt;
     private Date updatedAt;

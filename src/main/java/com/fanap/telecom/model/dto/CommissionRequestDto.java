@@ -16,8 +16,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommissionRequestDto implements Serializable {
-    private ReSeller resellerId;
-    private SaleOrder saleOrderId;
+    private Long resellerId;
+    private Long saleOrderId;
     private BigDecimal amount;
     private Date createdAt;
     private Date updateAt;
