@@ -2,6 +2,7 @@ package com.fanap.telecom.service.serviceImpl;
 
 import com.fanap.telecom.constants.ErrorMessage;
 import com.fanap.telecom.exception.NotFoundException;
+import com.fanap.telecom.model.Product;
 import com.fanap.telecom.model.SaleOrder;
 import com.fanap.telecom.model.dto.OrderListDto;
 import com.fanap.telecom.repository.SaleOrderRepo;
@@ -26,7 +27,6 @@ public class SaleOrderServiceImpl implements SaleOrderService {
 
     @Override
     public void save(SaleOrder saleOrder) {
-        checkOrder(saleOrder);
         saleOrderRepo.save(saleOrder);
     }
 
@@ -45,11 +45,5 @@ public class SaleOrderServiceImpl implements SaleOrderService {
     public List<OrderListDto> getAllOrder() {
         List<SaleOrder> saleOrderList = saleOrderRepo.findAll();
         return saleOrderList.stream().map(saleOrder -> mapper.map(saleOrder, OrderListDto.class)).toList();
-    }
-
-    private void checkOrder(SaleOrder saleOrder) {
-        if (Objects.isNull(saleOrder.getUser()) || Objects.isNull(saleOrder.getProduct())) {
-            throw new NotFoundException(ErrorMessage.NOT_VALID_ORDER);
-        }
     }
 }

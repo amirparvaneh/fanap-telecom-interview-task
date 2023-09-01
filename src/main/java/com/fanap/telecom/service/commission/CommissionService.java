@@ -7,7 +7,7 @@ import com.fanap.telecom.model.dto.SaleOrderRequestDto;
 import java.math.BigDecimal;
 
 public interface CommissionService {
-    BigDecimal calculateCommissionPerSale(SaleOrderRequestDto saleOrderRequestDto);
+    BigDecimal calculateCommissionPerSale(Long productId,Integer number);
     void saveCommission(CommissionRequestDto commissionRequestDto);
     void assignCommissionToReseller(Long saleOrderId);
 }

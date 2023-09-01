@@ -36,9 +36,9 @@ public class CommissionServiceImpl implements CommissionService {
     private BigDecimal commissionPercent;
 
     @Override
-    public BigDecimal calculateCommissionPerSale(SaleOrderRequestDto saleOrderRequestDto) {
-        Product product = productService.find(saleOrderRequestDto.getProduct());
-        BigDecimal amount = BigDecimal.valueOf(Math.multiplyExact(product.getPrice(), saleOrderRequestDto.getNumber()));
+    public BigDecimal calculateCommissionPerSale(Long productId,Integer number) {
+        Product product = productService.find(productId);
+        BigDecimal amount = BigDecimal.valueOf(Math.multiplyExact(product.getPrice(), number));
         return commissionCalculate(amount);
     }
 
@@ -54,7 +54,7 @@ public class CommissionServiceImpl implements CommissionService {
         checkSaleCommission(saleOrder);
         Long resellerId = saleOrder.getUser().getUserId();
         checkReseller(resellerId);
-        BigDecimal orderAmount = calculateCommissionPerSale(mapper.map(saleOrder, SaleOrderRequestDto.class));
+        BigDecimal orderAmount = calculateCommissionPerSale(saleOrder.getProduct().getProductId(),saleOrder.getNumber());
         Date currentDate = new Date();
         CommissionRequestDto commissionRequestDto = CommissionRequestDto.builder()
                 .resellerId(resellerId)
