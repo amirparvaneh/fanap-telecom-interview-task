@@ -12,10 +12,10 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SaleOrderRequestDto implements Serializable {
-
-    private Long product;
+public class OrderListDto implements Serializable {
+    private Long saleOrderId;
     private Long user;
+    private Long product;
     private Integer number;
     private Date createdAt;
     private Date updatedAt;

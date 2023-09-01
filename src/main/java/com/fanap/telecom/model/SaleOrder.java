@@ -25,5 +25,8 @@ public class SaleOrder extends BaseEntity{
     private Product product;
     @Column(name = "sale_number")
     private Integer number;
+    @OneToOne()
+    @JoinColumn(name = "commission_id")
+    private Commission commissionId;
 
 }

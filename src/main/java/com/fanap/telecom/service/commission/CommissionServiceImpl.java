@@ -27,7 +27,7 @@ public class CommissionServiceImpl implements CommissionService{
 
     @Override
     public BigDecimal calculateCommissionPerSale(SaleOrderRequestDto saleOrderRequestDto) {
-        Product product = productService.find(saleOrderRequestDto.getProductId());
+        Product product = productService.find(saleOrderRequestDto.getProduct());
         BigDecimal amount = BigDecimal.valueOf(Math.multiplyExact(product.getPrice(),saleOrderRequestDto.getNumber()));
         return commissionCalculate(amount);
     }
