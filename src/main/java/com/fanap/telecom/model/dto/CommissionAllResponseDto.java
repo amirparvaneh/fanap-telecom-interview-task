@@ -1,5 +1,6 @@
 package com.fanap.telecom.model.dto;
 
+
 import com.fanap.telecom.model.ReSeller;
 import com.fanap.telecom.model.SaleOrder;
 import lombok.AllArgsConstructor;
@@ -15,10 +16,10 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommissionRequestDto implements Serializable {
+public class CommissionAllResponseDto implements Serializable {
+    private BigDecimal amount;
     private ReSeller resellerId;
     private SaleOrder saleOrderId;
-    private BigDecimal amount;
     private Date createdAt;
     private Date updatedAt;
 }

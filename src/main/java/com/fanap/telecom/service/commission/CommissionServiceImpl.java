@@ -2,10 +2,12 @@ package com.fanap.telecom.service.commission;
 
 import com.fanap.telecom.constants.ErrorMessage;
 import com.fanap.telecom.exception.NotAllowedCommission;
+import com.fanap.telecom.exception.NotFoundException;
 import com.fanap.telecom.model.Commission;
 import com.fanap.telecom.model.Product;
 import com.fanap.telecom.model.ReSeller;
 import com.fanap.telecom.model.SaleOrder;
+import com.fanap.telecom.model.dto.CommissionAllResponseDto;
 import com.fanap.telecom.model.dto.CommissionRequestDto;
 import com.fanap.telecom.model.dto.SaleOrderRequestDto;
 import com.fanap.telecom.repository.CommissionRepo;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -36,7 +39,7 @@ public class CommissionServiceImpl implements CommissionService {
     private BigDecimal commissionPercent;
 
     @Override
-    public BigDecimal calculateCommissionPerSale(Long productId,Integer number) {
+    public BigDecimal calculateCommissionPerSale(Long productId, Integer number) {
         Product product = productService.find(productId);
         BigDecimal amount = BigDecimal.valueOf(Math.multiplyExact(product.getPrice(), number));
         return commissionCalculate(amount);
@@ -54,14 +57,14 @@ public class CommissionServiceImpl implements CommissionService {
         checkSaleCommission(saleOrder);
         Long resellerId = saleOrder.getUser().getUserId();
         checkReseller(resellerId);
-        BigDecimal orderAmount = calculateCommissionPerSale(saleOrder.getProduct().getProductId(),saleOrder.getNumber());
+        BigDecimal commissionAmount = calculateCommissionPerSale(saleOrder.getProduct().getProductId(), saleOrder.getNumber());
         Date currentDate = new Date();
         CommissionRequestDto commissionRequestDto = CommissionRequestDto.builder()
-                .resellerId(resellerId)
-                .saleOrderId(saleOrderId)
-                .amount(orderAmount)
+                .resellerId(resellerService.find(resellerId))
+                .saleOrderId(saleOrderService.find(saleOrderId))
+                .amount(commissionAmount)
                 .createdAt(currentDate)
-                .updateAt(currentDate)
+                .updatedAt(currentDate)
                 .build();
         saveCommission(commissionRequestDto);
     }
@@ -82,4 +85,16 @@ public class CommissionServiceImpl implements CommissionService {
             throw new NotAllowedCommission(ErrorMessage.COMMISSION_CALCULATED + saleOrder.getCommissionId());
         }
     }
+
+    @Override
+    public Commission findCommissionById(Long commissionId) {
+        return commissionRepo.findById(commissionId).orElseThrow(() -> new NotFoundException(ErrorMessage.ERROR_NOT_FOUND));
+    }
+
+    @Override
+    public List<CommissionAllResponseDto> getAllCommission() {
+        List<Commission> commissions = commissionRepo.findAll();
+        return commissions.stream().map(commission -> mapper.map(commission, CommissionAllResponseDto.class)).toList();
+    }
+
 }

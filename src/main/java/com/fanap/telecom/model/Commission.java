@@ -21,10 +21,10 @@ public class Commission extends BaseEntity {
     private Long commissionId;
     @Column(name = "amount")
     private BigDecimal amount;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "reseller_id")
     private ReSeller resellerId;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "sale_order_id")
     private SaleOrder saleOrderId;
 }
