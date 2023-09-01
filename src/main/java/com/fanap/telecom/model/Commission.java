@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "commission")
 @Data
@@ -18,11 +20,11 @@ public class Commission extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commissionId;
     @Column(name = "amount")
-    private Double amount;
+    private BigDecimal amount;
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private ReSeller reSeller;
+    @JoinColumn(name = "reseller_id")
+    private ReSeller resellerId;
     @ManyToOne
     @JoinColumn(name = "sale_order_id")
-    private SaleOrder saleOrder;
+    private SaleOrder saleOrderId;
 }

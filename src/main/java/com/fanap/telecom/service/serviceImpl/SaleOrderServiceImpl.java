@@ -6,6 +6,7 @@ import com.fanap.telecom.model.SaleOrder;
 import com.fanap.telecom.repository.SaleOrderRepo;
 import com.fanap.telecom.service.SaleOrderService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ import java.util.Optional;
 public class SaleOrderServiceImpl implements SaleOrderService {
 
     private final SaleOrderRepo saleOrderRepo;
-
+    private final ModelMapper mapper;
 
     @Override
     public void save(SaleOrder saleOrder) {

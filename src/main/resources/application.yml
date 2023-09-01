@@ -22,3 +22,7 @@ spring:
   sql:
     init:
       mode: always
+
+
+commission :
+  percent : 0.01

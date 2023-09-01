@@ -23,5 +23,7 @@ public class SaleOrder extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+    @Column(name = "sale_number")
+    private Integer number;
 
 }
