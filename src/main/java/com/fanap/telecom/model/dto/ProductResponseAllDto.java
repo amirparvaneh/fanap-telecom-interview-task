@@ -12,8 +12,10 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRequestDto implements Serializable {
-    private String userName;
+public class ProductResponseAllDto implements Serializable {
+
+    private String name;
+    private Long price;
     private Date createdAt;
     private Date updatedAt;
 }

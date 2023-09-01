@@ -2,7 +2,9 @@ package com.fanap.telecom.controller;
 
 
 import com.fanap.telecom.ApiVersion;
+import com.fanap.telecom.constants.Messages;
 import com.fanap.telecom.model.User;
+import com.fanap.telecom.model.dto.BaseResponseDto;
 import com.fanap.telecom.model.dto.UserRequestDto;
 import com.fanap.telecom.model.dto.UserResponseAllDto;
 import com.fanap.telecom.service.serviceImpl.UserServiceImpl;
@@ -22,14 +24,25 @@ public class UserController {
     private final ModelMapper mapper;
 
     @PostMapping
-    public ResponseEntity<String> addUser(@RequestBody UserRequestDto userRequestDto){
+    public ResponseEntity<BaseResponseDto<Object>> addUser(@RequestBody UserRequestDto userRequestDto) {
         userService.save(mapper.map(userRequestDto, User.class));
-        return ResponseEntity.ok("created user with username : " + userRequestDto.getUserName());
+        return ResponseEntity.ok().body(BaseResponseDto.builder()
+                .message(Messages.ENTITY_ADDED)
+                .build());
+    }
+
+    @PostMapping("/{sellerId}")
+    public ResponseEntity<BaseResponseDto<Object>> getSellerById(@PathVariable Long sellerId) {
+        User user = userService.find(sellerId);
+        return ResponseEntity.ok().body(BaseResponseDto.builder()
+                .message(Messages.ENTITY_ADDED)
+                .result(user)
+                .build());
     }
 
     @GetMapping
-    public ResponseEntity<List<UserResponseAllDto>> getAllUser(){
+    public ResponseEntity<List<UserResponseAllDto>> getAllUser() {
         return ResponseEntity.ok(userService.getAllUser());
     }
-    
+
 }
