@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
-        if(Objects.nonNull(userRepo.findUserByUserName(user.getUserName()))){
+        if (Objects.nonNull(userRepo.findUserByUserName(user.getUserName()))) {
             throw new DuplicateException(ErrorMessage.DUPLICATE_ENTITY + user.getUserName());
         }
         userRepo.save(user);
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserResponseAllDto> getAllUser() {
         List<User> users = userRepo.findAll();
-        return users.stream().map(user -> mapper.map(user,UserResponseAllDto.class)).toList();
+        return users.stream().map(user -> mapper.map(user, UserResponseAllDto.class)).toList();
     }
 
     @Override

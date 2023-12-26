@@ -5,7 +5,8 @@ import com.fanap.telecom.model.dto.UserResponseAllDto;
 
 import java.util.List;
 
-public interface UserService extends BaseService<User>{
+public interface UserService extends BaseService<User> {
     List<UserResponseAllDto> getAllUser();
+
     User getUserByUserName(String username);
 }

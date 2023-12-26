@@ -5,6 +5,6 @@ import com.fanap.telecom.model.dto.ResellerAllResponseDto;
 
 import java.util.List;
 
-public interface ResellerService extends BaseService<ReSeller>{
+public interface ResellerService extends BaseService<ReSeller> {
     List<ResellerAllResponseDto> findAllReseller();
 }

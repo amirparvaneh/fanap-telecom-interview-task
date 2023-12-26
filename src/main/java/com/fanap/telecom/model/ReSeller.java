@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @DiscriminatorValue(value = "reseller")
 public class ReSeller extends User {
 
-    @Column(name = "code",unique = true)
+    @Column(name = "code", unique = true)
     private String code;
 
     @Override

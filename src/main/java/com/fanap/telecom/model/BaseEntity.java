@@ -3,6 +3,7 @@ package com.fanap.telecom.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
+
 import java.io.Serializable;
 import java.util.Date;
 

@@ -9,9 +9,13 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface CommissionService {
-    BigDecimal calculateCommissionPerSale(Long productId,Integer number);
+    BigDecimal calculateCommissionPerSale(Long productId, Integer number);
+
     void saveCommission(CommissionRequestDto commissionRequestDto);
+
     void assignCommissionToReseller(Long saleOrderId);
+
     Commission findCommissionById(Long commissionId);
+
     List<CommissionAllResponseDto> getAllCommission();
 }
